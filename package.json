@@ -1,7 +1,20 @@
 {
   "private": true,
   "dependencies": {
+    "bel": "^5.1.5",
+    "listen-up": "^1.1.0",
+    "nanomorph": "^5.1.3",
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.10.0",
+    "webpack": "^3.10.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "build:watch": "npm run build -- -w",
+    "dev": "http-server --cors",
+    "watch": "npm run build:watch | npm run dev"
   }
 }
