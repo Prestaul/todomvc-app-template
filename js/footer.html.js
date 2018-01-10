@@ -1,6 +1,6 @@
-import html from 'bel';
+import { html } from 'apply-html';
 
-const renderFooter = (todos) => html`
+export default (todos) => html`
 	<footer class="footer">
 		<!-- This should be '0 items left' by default -->
 		<span class="todo-count">
@@ -20,16 +20,13 @@ const renderFooter = (todos) => html`
 			</li>
 		</ul>
 		<!-- Hidden if no completed items are left ↓ -->
-		${todos.completedCount > 0 ? html`
+		${todos.completedCount > 0 && html`
 			<button
 				class="clear-completed"
 				onclick=${e => todos.deleteCompleted()}
 			>
 				Clear completed
 			</button>
-		` : null
-		}
+		`}
 	</footer>
 `;
-
-export default renderFooter;

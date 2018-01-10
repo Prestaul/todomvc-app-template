@@ -1,23 +1,14 @@
-import html from 'bel';
+import { html } from 'apply-html';
 
-const ENTER_KEY = 13;
-
-const renderHeader = todos => html`
+export default todos => html`
 	<header class="header">
 		<h1>todos</h1>
-		<input
-			class="new-todo"
-			placeholder="What needs to be done?"
-			autofocus
-			onkeypress=${({target, keyCode}) => {
-				if(keyCode === ENTER_KEY) {
-					todos.addTodo(target.value);
-					target.value = '';
-				}
-			}}
-			onblur=${e => todos.addTodo(e.target.value)}
-		/>
+		<todos-add>
+			<input
+				class="new-todo"
+				placeholder="What needs to be done?"
+				autofocus
+			/>
+		<todos-add>
 	</header>
 `;
-
-export default renderHeader;

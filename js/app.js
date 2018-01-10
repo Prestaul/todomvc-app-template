@@ -1,19 +1,23 @@
-import morph from 'nanomorph';
+import { apply } from 'apply-html';
 import todosFactory from './todos.store.js';
 import renderApp from './app.html.js';
+
+import TodosAddElement from './todos-add.element.js';
 
 const { localStorage } = window;
 const LS_KEY = 'todos-vanillajs';
 
 export default function (root) {
+	customElements.define('todos-add', TodosAddElement);
+
 	const savedState = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
 	const todos = todosFactory(savedState);
 	const node = renderApp(todos);
-	root.appendChild(node);
+
+	apply(root, node);
 
 	const render = () => {
-		const newNode = renderApp(todos);
-		morph(node, newNode);
+		apply(root, renderApp(todos));
 	};
 
 	todos.on('updated', () => {
@@ -21,5 +25,5 @@ export default function (root) {
 		render();
 	});
 
-	window.addEventListener("hashchange", render, false);
+	window.addEventListener('hashchange', render, false);
 }

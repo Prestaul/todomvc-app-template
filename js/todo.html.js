@@ -1,9 +1,9 @@
-import html from 'bel';
+import { html } from 'apply-html';
 
 const ENTER_KEY = 13;
 const ESCAPE_KEY = 27;
 
-const renderTodo = todos => todo => html`
+export default todos => todo => html`
 	<li
 		id="todo-${todo.id}"
 		class="${todo.editing ? 'editing' : todo.completed ? 'completed' : ''}"
@@ -23,7 +23,7 @@ const renderTodo = todos => todo => html`
 				onclick=${e => todos.deleteTodo(todo.id)}
 			></button>
 		</div>
-		${todo.editing ? html`
+		${todo.editing && html`
 			<input
 				class="edit"
 				value="${todo.title}"
@@ -45,8 +45,6 @@ const renderTodo = todos => todo => html`
 					}
 				}}
 			/>
-		`: null}
+		`}
 	</li>
 `;
-
-export default renderTodo;
