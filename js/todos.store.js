@@ -1,13 +1,14 @@
 import makeEmitter from 'listen-up';
 
-export default savedTodos => makeEmitter({
-	nextId: Math.max(0, ...savedTodos.map(todo => todo.id)) + 1,
-	todos: savedTodos.map(({id, title, completed}) => ({
-		id,
-		title,
-		completed,
-		editing: false
-	})),
+const makeTodo = ({ id, title, completed = false }) => ({
+	id,
+	title,
+	completed,
+	editing: false
+});
+
+export default (savedTodos = []) => makeEmitter({
+	todos: savedTodos.map(makeTodo),
 
 	get filter() {
 		const { hash } = document.location;
@@ -34,12 +35,10 @@ export default savedTodos => makeEmitter({
 	addTodo(title) {
 		title = title && title.trim();
 		if(title) {
-			this.todos.push({
-				id: this.nextId++,
-				title,
-				completed: false,
-				editing: false
-			});
+			this.todos.push(makeTodo({
+				id: Math.max(0, ...this.todos.map(todo => todo.id)) + 1,
+				title
+			}));
 			this.emit('updated');
 		}
 	},

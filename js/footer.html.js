@@ -7,7 +7,7 @@ const renderFooter = (todos) => html`
 			<strong>${todos.todoCount - todos.completedCount}</strong>
 			item${todos.todoCount - todos.completedCount !== 1 ? 's' : ''} left
 		</span>
-		<!-- Remove this if you don't implement routing -->
+		<!-- Remove this if you do not implement routing -->
 		<ul class="filters">
 			<li>
 				<a class="${todos.filter === '' ? 'selected' : ''}" href="#/">All</a>

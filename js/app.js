@@ -1,4 +1,5 @@
 import morph from 'nanomorph';
+import window from 'global/window';
 import todosFactory from './todos.store.js';
 import renderApp from './app.html.js';
 
